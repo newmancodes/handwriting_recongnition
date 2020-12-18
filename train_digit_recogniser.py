@@ -1,4 +1,5 @@
 import ssl
+import tensorflow as tf
 import keras
 from keras.datasets import mnist
 from keras.models import Sequential
@@ -8,6 +9,10 @@ from keras import backend as K
 
 import requests
 requests.packages.urllib3.disable_warnings()
+
+gpus = tf.config.experimental.list_physical_devices(device_type='GPU')
+for gpu in gpus:
+    tf.config.experimental.set_memory_growth(gpu, True)
 
 try:
     _create_unverified_https_context = ssl._create_unverified_context
